@@ -50,6 +50,8 @@ public class City implements Comparable<City> {
 
     public String getName() { return name; }
 
+    public Integer getMetersAboveSeaLevel() { return metersAboveSeaLevel; }
+
     private void setId(int id) {
         if (id <= 0) {
             throw new FieldException("Exception: Field 'name' can not be less or equal zero");

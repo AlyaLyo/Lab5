@@ -3,6 +3,9 @@ import City.Fields.Climate;
 import City.Fields.Coordinates;
 import City.Fields.Human;
 import City.Fields.IdController;
+import Commands.Help;
+import Commands.Info;
+import Commands.InitTimeController;
 
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
@@ -33,13 +36,16 @@ public class Main {
         cities.add(spb);
         cities.add(moscow);
 
-        //Comparator nameComparator = new NameCityComparator();
-        //Collections.sort(cities,nameComparator);
-        Collections.sort(cities);
+        Comparator nameComparator = new NameCityComparator();
+        Collections.sort(cities,nameComparator);
+        //Collections.sort(cities);
 
         for (City city : cities) {
-            System.out.println(city.getId() + " " + city.getName());
+            System.out.println(city.getName());
         }
+
+        Info info = new Info(cities,InitTimeController.getInstance());
+        info.execute();
 
     }
 
