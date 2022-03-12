@@ -3,9 +3,8 @@ import City.Fields.Climate;
 import City.Fields.Coordinates;
 import City.Fields.Human;
 import City.Fields.IdController;
-import Commands.Help;
-import Commands.Info;
-import Commands.InitTimeController;
+import Commands.Info.Info;
+import Commands.Info.InitTimeController;
 
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
@@ -44,8 +43,7 @@ public class Main {
             System.out.println(city.getName());
         }
 
-        Info info = new Info(cities,InitTimeController.getInstance());
-        info.execute();
+        System.out.println(Climate.values());
 
     }
 

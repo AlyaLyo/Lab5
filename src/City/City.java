@@ -52,7 +52,11 @@ public class City implements Comparable<City> {
 
     public Integer getMetersAboveSeaLevel() { return metersAboveSeaLevel; }
 
-    private void setId(int id) {
+    public Long getAgglomeration() {
+        return  agglomeration;
+    }
+
+    public void setId(int id) {
         if (id <= 0) {
             throw new FieldException("Exception: Field 'name' can not be less or equal zero");
         }

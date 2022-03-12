@@ -1,15 +1,18 @@
 package Commands;
 
 import City.City;
+import IO.Printable;
 
 import java.util.LinkedList;
 
 public class AverageOfMetersAboveSeaLevel implements Commands {
 
     private LinkedList<City> cities;
+    private Printable printable;
 
-    public AverageOfMetersAboveSeaLevel(LinkedList<City> cities) {
+    public AverageOfMetersAboveSeaLevel(LinkedList<City> cities, Printable printable) {
         this.cities = cities;
+        this.printable = printable;
     }
 
     @Override
@@ -19,7 +22,7 @@ public class AverageOfMetersAboveSeaLevel implements Commands {
             sum = city.getMetersAboveSeaLevel();
         }
         Integer average = sum / cities.size();
-        System.out.println(average);
+        printable.println(average.toString());
     }
 
 }
