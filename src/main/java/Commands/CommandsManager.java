@@ -11,10 +11,6 @@ import org.reflections.Reflections;
 
 import java.util.*;
 
-/**
- * Класс, отвечающий за считывание команды.
- */
-
 public class CommandsManager {
 
     private LinkedList<City> cities;
@@ -95,7 +91,7 @@ public class CommandsManager {
     private List<Object> scanConsoleComplexArgs (Information information,Printable printable, Scannable scannable) throws Exception {
         List<Object> complexArguments = new ArrayList<>();
         for (int i = 0; i < information.getComplexArguments(); ++i) {
-            CityConstructor constructor = (CityConstructor) information.getConstructors().get(i).getConstructors()[0].newInstance(printable,scannable);
+            CityConstructor constructor = (CityConstructor) information.getConstructors().get(i).getConstructors()[0].newInstance(printable,scannable,cities);
             complexArguments.add(constructor.scanFromConsoleConstruct());
         }
         return complexArguments;
@@ -104,7 +100,7 @@ public class CommandsManager {
     private List<Object> scanFileComplexArgs (Information information, Printable printable, Scannable scannable) throws Exception {
         List<Object> complexArguments = new ArrayList<>();
         for (int i = 0; i < information.getComplexArguments(); ++i) {
-            CityConstructor constructor = (CityConstructor) information.getConstructors().get(i).getConstructors()[0].newInstance(printable,scannable);
+            CityConstructor constructor = (CityConstructor) information.getConstructors().get(i).getConstructors()[0].newInstance(printable,scannable, cities);
             complexArguments.add(constructor.scanFromFileConstruct());
         }
         return complexArguments;
@@ -124,4 +120,3 @@ public class CommandsManager {
     }
 
 }
-

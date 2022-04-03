@@ -1,8 +1,7 @@
 import City.City;
-import City.Fields.IdController;
+import City.NameCityComparator;
 import Commands.CommandsManager;
 import IO.CSVManager;
-import City.NameCityComparator;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -21,7 +20,8 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        IdController idController = IdController.getInstance();
+        System.setProperty("org.slf4j.simpleLogger.log.org.reflections", "off");
+
         LinkedList<City> cities = new LinkedList<>();
 
         Comparator nameComparator = new NameCityComparator();
