@@ -2,7 +2,10 @@ import City.City;
 import City.NameCityComparator;
 import Commands.CommandsManager;
 import IO.CSVManager;
+import IO.ConsolePrint;
+import IO.Printable;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -34,18 +37,25 @@ public class Main {
 
         }
 
+        Printable printable = new ConsolePrint();
         CommandsManager commandsManager = new CommandsManager(cities);
 
-        waitForAction(commandsManager);
+        waitForAction(commandsManager, printable);
     }
 
-    private static void waitForAction(CommandsManager commandsManager){
+    /**
+     * Метод, считывающий и выполняющий команду.
+     * @param commandsManager Считывание команды.
+     * @param printable Вывод.
+     */
+
+    private static void waitForAction(CommandsManager commandsManager, Printable printable) throws IOException {
         try {
             commandsManager.consoleCommand().execute();
         } catch (Exception exception) {
-            exception.getMessage();
+            printable.println(exception.getMessage());
         }
-        waitForAction(commandsManager);
+        waitForAction(commandsManager, printable);
     }
 
 }

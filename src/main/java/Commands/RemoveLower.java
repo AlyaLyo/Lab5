@@ -11,26 +11,53 @@ import java.util.LinkedList;
 
 public class RemoveLower implements Commands {
 
-    private City city;
+    /**
+     * Коллекция городов.
+     */
+
     private LinkedList<City> cities;
 
-    public RemoveLower(City city,LinkedList<City> cities) {
-        this.city = city;
+    /**
+     * Id элемента коллекции.
+     */
+
+    private String id;
+
+    /**
+     * @param cities Коллекция городов.
+     * @param id Id элемента коллекции.
+     */
+
+    public RemoveLower(LinkedList<City> cities, String id) {
         this.cities = cities;
+        this.id = id;
     }
+
+    /**
+     * Метод, запускающий выполнение команды.
+     */
 
     @Override
     public void execute() {
-        int index = cities.indexOf(city);
-        for (int i = index + 1; i <= cities.size(); i++) {
-            cities.remove(i);
+        for (City city : cities) {
+            if (city.getId() < Integer.parseInt(id)) {
+                cities.remove(city);
+            }
         }
     }
 
+    /**
+     * @return Command name.
+     */
+
     public static String name() { return "remove_lower"; }
 
+    /**
+     * @return Command information.
+     */
+
     public static Information getInfo() throws Exception {
-        return new Information(1,0,true,false, Arrays.asList("number"), null);
+        return new Information(1,0,true,false, Arrays.asList("id"), null);
     }
 
 }

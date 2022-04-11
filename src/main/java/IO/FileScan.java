@@ -12,12 +12,12 @@ public class FileScan implements Scannable {
     private FileReader reader;
     private boolean eof = false;
 
-    public FileScan (FileReader reader) throws IOException {
-        this.reader = reader;
+    public FileScan (String fileName) throws IOException {
+        reader = new FileReader(fileName);
         if (reader.read() == -1) {
             this.eof = true;
         }
-        reader.reset();
+        reader = new FileReader(fileName);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class FileScan implements Scannable {
                 string.append(chr);
             }
         }
-        return Integer.parseInt(string.toString());
+        return Integer.parseInt(string.toString().replace("\r",""));
     }
 
     @Override
@@ -55,7 +55,7 @@ public class FileScan implements Scannable {
                     string.append(chr);
                 }
             }
-            return Double.parseDouble(string.toString());
+            return Double.parseDouble(string.toString().replace("\r",""));
     }
 
     @Override
@@ -74,7 +74,7 @@ public class FileScan implements Scannable {
                 string.append(chr);
             }
         }
-        return string.toString();
+        return string.toString().replace("\r","");
     }
 
     @Override
@@ -93,7 +93,7 @@ public class FileScan implements Scannable {
                 string.append(chr);
             }
         }
-        return Long.parseLong(string.toString());
+        return Long.parseLong(string.toString().replace("\r",""));
     }
 
     @Override

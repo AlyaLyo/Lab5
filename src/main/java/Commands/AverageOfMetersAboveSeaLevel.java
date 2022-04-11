@@ -12,13 +12,31 @@ import java.util.LinkedList;
 
 public class AverageOfMetersAboveSeaLevel implements Commands {
 
+    /**
+     * Коллекция городов.
+     */
+
     private LinkedList<City> cities;
+
+    /**
+     * Вывод.
+     */
+
     private Printable printable;
+
+    /**
+     * @param cities Коллекция городов.
+     * @param printable Вывод.
+     */
 
     public AverageOfMetersAboveSeaLevel(LinkedList<City> cities, Printable printable) {
         this.cities = cities;
         this.printable = printable;
     }
+
+    /**
+     * Метод, запускающий выполнение команды.
+     */
 
     @Override
     public void execute() throws IOException {
@@ -30,9 +48,17 @@ public class AverageOfMetersAboveSeaLevel implements Commands {
         printable.println(average.toString());
     }
 
+    /**
+     * @return Command name.
+     */
+
     public static String name() {
         return "average_of_meters_above_sea_level";
     }
+
+    /**
+     * @return Command information.
+     */
 
     public static Information getInfo() throws Exception {
         return new Information(0,0,true,true, null,null);

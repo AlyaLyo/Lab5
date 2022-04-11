@@ -11,13 +11,30 @@ import org.reflections.Reflections;
 
 import java.util.*;
 
+/**
+ * Класс, отвечающий за считывание команды.
+ */
+
 public class CommandsManager {
 
+    /**
+     * Коллекция городов.
+     */
+
     private LinkedList<City> cities;
+
+    /**
+     * @param cities Коллекция городов.
+     */
 
     public CommandsManager(LinkedList<City> cities) {
         this.cities = cities;
     }
+
+    /**
+     * Метод, считывающий команду из консоли.
+     * @return Команда.
+     */
 
     public Commands consoleCommand () throws Exception {
         Printable printable = new ConsolePrint();
@@ -27,12 +44,18 @@ public class CommandsManager {
         String nextCommand = scannable.scanString();
         Class<? extends Commands> command = getCommand(nextCommand);
         Information information = getCommandInfo(command);
-        List<String> simpleArguments = scanConsoleSimpleArgs(information,printable,scannable);
+        List<String> simpleArguments = scanConsoleSimpleArgs(information,nextCommand);
         List<Object> complexArguments = scanConsoleComplexArgs(information,printable,scannable);
 
         Commands newCommand = commandConstructor(command,simpleArguments,complexArguments,information,printable);
         return newCommand;
     }
+
+    /**
+     * Метод, считывающий команду из файла.
+     * @param scannable Ввод.
+     * @return Команда.
+     */
 
     public List<Commands> fileCommands(Scannable scannable) throws Exception {
         List<Commands> commands = new ArrayList<>();
@@ -57,36 +80,69 @@ public class CommandsManager {
         return commands;
     }
 
+    /**
+     * Метод, определяющий класс команды.
+     * @param commandName Command name.
+     * @return Класс команды.
+     */
+
     private Class<? extends Commands> getCommand(String commandName) throws Exception {
         Reflections reflections = new Reflections("Commands");
         for(Class<? extends Commands> command : reflections.getSubTypesOf(Commands.class)) {
-            if (command.getMethod("name").invoke(null).equals(commandName.trim())) {
+            if (command.getMethod("name").invoke(null).equals(commandName.trim().split(" ")[0])) {
                 return command;
             }
         }
         throw new InputException("Exception: Wrong command");
     }
 
+    /**
+     * Метод, определяющий информацию о команде.
+     * @param command Команда {@link Commands}.
+     * @return Command Information.
+     */
+
     private Information getCommandInfo(Class<? extends Commands> command) throws Exception {
         return (Information) command.getMethod("getInfo").invoke(null);
     }
 
-    private List<String> scanConsoleSimpleArgs (Information information, Printable printable, Scannable scannable) throws Exception {
+    /**
+     * Метод, определяющий простые аргументы команды из консоли.
+     * @param information Command information.
+     * @param line Введенная строка.
+     * @return Простые аргументы команды.
+     */
+
+    private List<String> scanConsoleSimpleArgs (Information information, String line) throws Exception {
         List<String> simpleArguments = new ArrayList<>();
-        for (int i = 0; i < information.getSimpleArguments(); ++i) {
-            printable.print("Enter " + information.getDescription().get(i) + " : ");
-            simpleArguments.add(scannable.scanString());
+        for (int i = 1; i <= information.getSimpleArguments(); ++i) {
+            simpleArguments.add(line.trim().split(" ")[i]);
         }
         return simpleArguments;
     }
 
+    /**
+     * Метод, определяющий простые аргументы команды из файла.
+     * @param information Command information.
+     * @param fromFile Строка из файла.
+     * @return Простые аргументы команды.
+     */
+
     private List<String> scanFileSimpleArgs (Information information, List<String> fromFile) {
         List<String> simpleArguments = new ArrayList<>();
-        for (int i = 0; i < information.getSimpleArguments(); ++i) {
+        for (int i = 1; i <= information.getSimpleArguments(); ++i) {
             simpleArguments.add(fromFile.get(i));
         }
         return simpleArguments;
     }
+
+    /**
+     * Метод, определяющий составные аргументы команды из консоли.
+     * @param information Command information.
+     * @param printable Вывод.
+     * @param scannable Ввод.
+     * @return Составные аргументы команды.
+     */
 
     private List<Object> scanConsoleComplexArgs (Information information,Printable printable, Scannable scannable) throws Exception {
         List<Object> complexArguments = new ArrayList<>();
@@ -97,6 +153,14 @@ public class CommandsManager {
         return complexArguments;
     }
 
+    /**
+     * Метод, определяющий составные аргументы команды из файла.
+     * @param information Command information.
+     * @param printable Вывод.
+     * @param scannable Ввод.
+     * @return Составные аргументы команды.
+     */
+
     private List<Object> scanFileComplexArgs (Information information, Printable printable, Scannable scannable) throws Exception {
         List<Object> complexArguments = new ArrayList<>();
         for (int i = 0; i < information.getComplexArguments(); ++i) {
@@ -105,6 +169,16 @@ public class CommandsManager {
         }
         return complexArguments;
     }
+
+    /**
+     * Метод, составляющий конструктор команды.
+     * @param command Команда {@link Commands}.
+     * @param simpleArguments Простые аргументы команды.
+     * @param complexArguments Составные аргументы команды.
+     * @param information Command information.
+     * @param printable Вывод.
+     * @return Конструктор команды.
+     */
 
     private Commands commandConstructor (Class<? extends Commands> command, List<String> simpleArguments, List<Object> complexArguments, Information information, Printable printable) throws Exception {
         List<Object> arguments = new ArrayList<>();

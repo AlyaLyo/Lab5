@@ -13,9 +13,29 @@ import java.util.LinkedList;
 
 public class Add implements Commands {
 
+    /**
+     * Коллекция городов.
+     */
+
     private LinkedList<City> cities;
+
+    /**
+     * Эллемент коллекции городов.
+     */
+
     private City city;
+
+    /**
+     * Вывод.
+     */
+
     private Printable printable;
+
+    /**
+     * @param cities Коллекция городов.
+     * @param printable Вывод.
+     * @param city Элемент коллекции городов.
+     */
 
     public Add(LinkedList<City> cities, Printable printable, City city) {
         this.cities = cities;
@@ -23,12 +43,24 @@ public class Add implements Commands {
         this.printable = printable;
     }
 
+    /**
+     * Метод, запускающий выполнение команды.
+     */
+
     @Override
     public void execute() {
         cities.add(city);
     }
 
+    /**
+     * @return Command name.
+     */
+
     public static String name() { return "add"; }
+
+    /**
+     * @return Command information.
+     */
 
     public static Information getInfo() throws Exception {
         return new Information(0,1,true,true, null, Arrays.asList(CityConstructor.class));

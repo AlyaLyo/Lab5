@@ -12,27 +12,62 @@ import java.util.LinkedList;
 
 public class UpdateId implements Commands{
 
-    private City oldCity;
-    private City newCity;
+    /**
+     * Коллекция городов.
+     */
+
     private LinkedList<City> cities;
 
-    public UpdateId(City oldCity, City newCity, LinkedList<City> cities) {
-        this.oldCity = oldCity;
-        this.newCity = newCity;
+    /**
+     * Id элемента коллекции.
+     */
+
+    private String id;
+
+    /**
+     * Элемент коллекции.
+     */
+
+    private City city;
+
+    /**
+     * @param cities Коллекция городов.
+     * @param id Id элемента коллекции.
+     * @param city Элемент коллекции.
+     */
+
+    public UpdateId(LinkedList<City> cities, String id, City city) {
         this.cities = cities;
+        this.id = id;
+        this.city = city;
     }
+
+    /**
+     * Метод, запускающий выполнение команды.
+     */
 
     @Override
     public void execute() {
-        int index = cities.indexOf(oldCity);
-        cities.remove(index);
-        cities.add(newCity);
-        newCity.setId(index + 1);
+        for (City city : cities) {
+            if (city.getId() == Integer.parseInt(id)) {
+                cities.remove(city);
+            }
+        }
+        cities.add(city);
+        city.setId(Integer.parseInt(id));
     }
+
+    /**
+     * @return Command name.
+     */
 
     public static String name() { return "update_id"; }
 
+    /**
+     * @return Command information.
+     */
+
     public static Information getInfo() throws Exception {
-        return new Information(1,0,true,false, Arrays.asList("id"), Arrays.asList(CityConstructor.class));
+        return new Information(1,1,true,false, Arrays.asList("id"), Arrays.asList(CityConstructor.class));
     }
 }

@@ -10,11 +10,23 @@ import java.io.IOException;
 
 public class Help implements Commands {
 
+    /**
+     * Вывод.
+     */
+
     private Printable printable;
+
+    /**
+     * @param printable Вывод.
+     */
 
     public Help (Printable printable)  {
         this.printable = printable;
     }
+
+    /**
+     * Метод, запускающий выполнение команды.
+     */
 
     @Override
     public void execute() throws IOException {
@@ -34,11 +46,19 @@ public class Help implements Commands {
                 "average_of_meters_above_sea_level : вывести среднее значение поля metersAboveSeaLevel для всех элементов коллекции\n" +
                 "group_counting_by_agglomeration : сгруппировать элементы коллекции по значению поля agglomeration, вывести количество элементов в каждой группе\n" +
                 "print_ascending : вывести элементы коллекции в порядке возрастани");
-        }
+    }
+
+    /**
+     * @return Command name.
+     */
 
     public static String name() {
         return "help";
     }
+
+    /**
+     * @return Command information.
+     */
 
     public static Information getInfo() throws Exception {
         return new Information(0,0,false,true, null,null);

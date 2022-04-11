@@ -11,24 +11,50 @@ import java.util.LinkedList;
 
 public class RemoveById implements Commands{
 
-    private int id;
+    /**
+     * Id элемента коллекции.
+     */
+
+    private String id;
+
+    /**
+     * Коллекция городов.
+     */
+
     private LinkedList<City> cities;
 
-    public RemoveById(int id, LinkedList<City> cities) {
+    /**
+     * @param cities Коллекция городов.
+     * @param id Id элемента колллекции.
+     */
+
+    public RemoveById(LinkedList<City> cities, String id) {
         this.cities = cities;
         this.id = id;
     }
 
+    /**
+     * Метод, запускающий выполнение команды.
+     */
+
     @Override
     public void execute() {
         for (City city : cities) {
-            if (city.getId() == id) {
+            if (city.getId() == Integer.parseInt(id)) {
                 cities.remove(city);
             }
         }
     }
 
+    /**
+     * @return Command name.
+     */
+
     public static String name() { return "remove_by_id"; }
+
+    /**
+     * @return Command information.
+     */
 
     public static Information getInfo() throws Exception {
         return new Information(1,0,true,false, Arrays.asList("id"), null);

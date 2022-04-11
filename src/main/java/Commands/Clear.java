@@ -1,7 +1,6 @@
 package Commands;
 
 import City.City;
-import IO.Printable;
 
 import java.util.LinkedList;
 
@@ -11,22 +10,40 @@ import java.util.LinkedList;
 
 public class Clear implements Commands {
 
-    private LinkedList<City> cities;
-    private Printable printable;
+    /**
+     * Коллекция городов.
+     */
 
-    public Clear(LinkedList<City> cities, Printable printable) {
+    private LinkedList<City> cities;
+
+    /**
+     * @param cities Коллекция городов.
+     */
+
+    public Clear(LinkedList<City> cities) {
         this.cities = cities;
-        this.printable = printable;
     }
+
+    /**
+     * Метод, запускающий выполнение команды.
+     */
 
     @Override
     public void execute() {
         cities.clear();
     }
 
+    /**
+     * @return Command name.
+     */
+
     public static String name() {
         return "clear";
     }
+
+    /**
+     * @return Command information.
+     */
 
     public static Information getInfo() throws Exception {
         return new Information(0,0,true,false, null, null);

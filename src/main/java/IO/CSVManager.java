@@ -32,13 +32,16 @@ public class CSVManager {
         throw new GetAccessException("Exception: No access for reading file");
     }
 
-    public static void toCSV(LinkedList<City> cities) throws Exception {
-        CSVWriter csvWriter = new CSVWriter(new BufferedWriter(new FileWriter("collection.csv")), ';');
-        cities.forEach(elem -> {
-            String [] collection = elem.toString().split(",");
-            csvWriter.writeNext(collection);
-        });
-        csvWriter.close();
+    public static void toCSV(LinkedList<City> cities, String filename) throws Exception {
+        if (Files.isWritable(Paths.get(filename))) {
+            CSVWriter csvWriter = new CSVWriter(new BufferedWriter(new FileWriter(filename)), ';');
+            cities.forEach(elem -> {
+                String[] collection = elem.toString().split(",");
+                csvWriter.writeNext(collection);
+            });
+            csvWriter.close();
+        }
+        throw new GetAccessException("Exception: No access for writing file");
     }
 
 }

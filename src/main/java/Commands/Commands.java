@@ -8,6 +8,10 @@ import java.io.IOException;
 
 public interface Commands {
 
+    /**
+     * Метод, запускающий команду.
+     */
+
     void execute() throws IOException, Exception;
 
     static int[] argumentsAmount() {
