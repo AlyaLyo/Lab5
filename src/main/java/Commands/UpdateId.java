@@ -51,10 +51,10 @@ public class UpdateId implements Commands{
         for (City city : cities) {
             if (city.getId() == Integer.parseInt(id)) {
                 cities.remove(city);
+                cities.add(city);
+                city.setId(Integer.parseInt(id));
             }
         }
-        cities.add(city);
-        city.setId(Integer.parseInt(id));
     }
 
     /**

@@ -16,22 +16,34 @@ public class ConsoleScan implements Scannable {
 
     @Override
     public Integer scanInteger() {
-        return scanner.nextInt();
+        if (hasNextLine()) {
+            return scanner.nextInt();
+        }
+        return null;
     }
 
     @Override
     public Double scanDouble() {
-        return scanner.nextDouble();
+        if (hasNextLine()) {
+            return scanner.nextDouble();
+        }
+        return null;
     }
 
     @Override
     public String scanString() {
-        return scanner.nextLine();
+        if (hasNextLine()) {
+            return scanner.nextLine();
+        }
+        return null;
     }
 
     @Override
-    public long scanLong() {
-        return scanner.nextLong();
+    public Long scanLong() {
+        if (hasNextLine()) {
+            return scanner.nextLong();
+        }
+        return null;
     }
 
     @Override

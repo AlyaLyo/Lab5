@@ -78,7 +78,7 @@ public class FileScan implements Scannable {
     }
 
     @Override
-    public long scanLong() throws IOException {
+    public Long scanLong() throws IOException {
         StringBuilder string = new StringBuilder();
         if (hasNextLine()) {
             while (true) {

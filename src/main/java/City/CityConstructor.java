@@ -104,11 +104,23 @@ public class CityConstructor {
     private Coordinates setCoordinates() throws Exception {
         try {
             printable.print("Enter x coordinate: ");
-            Double x = scannable.scanDouble();
+            String xString = scannable.scanString();
+            while (xString == null) {
+                printable.print("Enter x coordinate: ");
+                xString = scannable.scanString();
+            }
+            Double x = Double.valueOf(xString);
+
             printable.print("Enter y coordinate: ");
-            Integer y = scannable.scanInteger();
+            String yString = scannable.scanString();
+            while (yString == null) {
+                printable.print("Enter y coordinate: ");
+                yString = scannable.scanString();
+            }
+            Integer y = Integer.valueOf(yString);
             Coordinates coordinates = new Coordinates(x,y);
             return coordinates;
+
         } catch (Exception e){
             printable.println(e.getMessage());
             return setCoordinates();
@@ -117,10 +129,14 @@ public class CityConstructor {
     }
 
     private int setArea() throws Exception {
-        printable.print("Enter an area: ");
-
         try {
-            int area = scannable.scanInteger();
+            printable.print("Enter an area: ");
+            String areaString = scannable.scanString();
+            while (areaString == null) {
+                printable.print("Enter an area: ");
+                areaString = scannable.scanString();
+            }
+            int area = Integer.valueOf(areaString);
             return area;
         } catch (Exception e){
             printable.println(e.getMessage());
@@ -130,9 +146,14 @@ public class CityConstructor {
     }
 
     private long setPopulation() throws Exception {
-        printable.print("Enter a population: ");
         try {
-            long population = scannable.scanLong();
+            printable.print("Enter a population: ");
+            String populationString = scannable.scanString();
+            while (populationString == null) {
+                printable.print("Enter a population: ");
+                populationString = scannable.scanString();
+            }
+            long population = Long.valueOf(populationString);
             return population;
         } catch (Exception e){
             printable.println(e.getMessage());
@@ -141,9 +162,14 @@ public class CityConstructor {
     }
 
     private Integer setMetersAboveSeaLevel() throws Exception {
-        printable.print("Enter meters above sea level: ");
         try {
-            Integer metersAboveSeaLevel = scannable.scanInteger();
+            printable.print("Enter meters above sea level: ");
+            String metersAboveSeaLevelString = scannable.scanString();
+            while (metersAboveSeaLevelString == null) {
+                printable.print("Enter meters above sea level: ");
+                metersAboveSeaLevelString = scannable.scanString();
+            }
+            Integer metersAboveSeaLevel = Integer.valueOf(metersAboveSeaLevelString);
             return metersAboveSeaLevel;
         } catch (Exception e) {
             printable.println(e.getMessage());
@@ -153,21 +179,31 @@ public class CityConstructor {
     }
 
     private long setTelephoneCode() throws Exception {
-        printable.print("Enter a telephone code: ");
-
         try {
-            long telephoneCode = scannable.scanLong();
+            printable.print("Enter a telephone code: ");
+            String telephoneCodeString = scannable.scanString();
+            while (telephoneCodeString == null) {
+                printable.print("Enter a telephone code: ");
+                telephoneCodeString = scannable.scanString();
+            }
+            long telephoneCode = Long.valueOf(telephoneCodeString);
             return telephoneCode;
         } catch (Exception e) {
+            printable.println(e.getMessage());
             return setTelephoneCode();
         }
 
     }
 
     private long setAgglomeration() throws Exception {
-        printable.print("Enter an agglomeration: ");
         try {
-            long agglomeration = scannable.scanLong();
+            printable.print("Enter an agglomeration: ");
+            String agglomerationString = scannable.scanString();
+            while (agglomerationString == null) {
+                printable.print("Enter an agglomeration: ");
+                agglomerationString = scannable.scanString();
+            }
+            long agglomeration = Long.valueOf(agglomerationString);
             return agglomeration;
         } catch (Exception e){
             printable.println(e.getMessage());
@@ -179,8 +215,8 @@ public class CityConstructor {
     private Climate setClimate() throws Exception {
         String climateName;
         Climate climate = null;
-        printable.print("Choose a climate " + EnumSet.allOf(Climate.class)  + ": ");
         while (climate == null){
+            printable.print("Choose a climate " + EnumSet.allOf(Climate.class)  + ": ");
             climateName = scannable.scanString();
             climate = Climate.parse(climateName);
         }
@@ -190,12 +226,31 @@ public class CityConstructor {
     private Human setGovernor() throws Exception {
 
         try {
-            printable.print("Enter a birth year of governor :");
-            int year = scannable.scanInteger();
-            printable.print("Enter a birth month of governor :");
-            int month = scannable.scanInteger();
-            printable.print("Enter a birth day of governor :");
-            int day = scannable.scanInteger();
+
+            printable.print("Enter a birth year of governor :b");
+            String yearString = scannable.scanString();
+            while (yearString == null) {
+                printable.print("Enter a birth year of governor : ");
+                yearString = scannable.scanString();
+            }
+            int year = Integer.valueOf(yearString);
+
+            printable.print("Enter a birth month of governor : ");
+            String monthString = scannable.scanString();
+            while (monthString == null) {
+                printable.print("Enter a birth month of governor : ");
+                monthString = scannable.scanString();
+            }
+            int month = Integer.valueOf(monthString);
+
+            printable.print("Enter a birth day of governor : ");
+            String dayString = scannable.scanString();
+            while (dayString == null) {
+                printable.print("Enter a birth day of governor : ");
+                dayString = scannable.scanString();
+            }
+            int day = Integer.valueOf(dayString);
+
             Human governor = new Human(LocalDate.of(year, month, day));
             return governor;
         } catch (Exception e){

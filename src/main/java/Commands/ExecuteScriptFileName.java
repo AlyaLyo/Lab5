@@ -53,7 +53,7 @@ public class ExecuteScriptFileName implements Commands {
                 try {
                     command.execute();
                 } catch (Exception exception) {
-                    exception.getMessage();
+                    System.out.println(exception.getMessage());
                 }
             });
         }

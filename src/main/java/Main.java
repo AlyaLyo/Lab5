@@ -22,6 +22,8 @@ public class Main {
      */
 
     public static void main(String[] args) throws Exception {
+        
+        //if (args.size())
 
         System.setProperty("org.slf4j.simpleLogger.log.org.reflections", "off");
 
