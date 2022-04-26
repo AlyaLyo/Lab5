@@ -34,9 +34,10 @@ public class Main {
         //Collections.sort(cities);
 
         try {
-            cities = CSVManager.parse("collection.csv");//args[0]);
+            cities = CSVManager.parse(args[0]);
         } catch (Exception e){
-
+            System.out.println("File is requested");
+            System.exit(0);
         }
 
         Printable printable = new ConsolePrint();

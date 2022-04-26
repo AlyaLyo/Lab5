@@ -6,6 +6,7 @@ import City.Fields.Human;
 import City.Fields.IdController;
 import IO.Printable;
 import IO.Scannable;
+
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.EnumSet;
@@ -109,7 +110,12 @@ public class CityConstructor {
                 printable.print("Enter x coordinate: ");
                 xString = scannable.scanString();
             }
-            Double x = Double.valueOf(xString);
+            Double x = null;
+            try {
+                x = Double.valueOf(xString);
+            } catch (Exception exception){
+                printable.println("Double type was requested");
+            }
 
             printable.print("Enter y coordinate: ");
             String yString = scannable.scanString();
@@ -117,7 +123,12 @@ public class CityConstructor {
                 printable.print("Enter y coordinate: ");
                 yString = scannable.scanString();
             }
-            Integer y = Integer.valueOf(yString);
+            Integer y = null;
+            try {
+                y = Integer.valueOf(yString);
+            } catch (Exception exception) {
+                printable.println("Integer type was requested");
+            }
             Coordinates coordinates = new Coordinates(x,y);
             return coordinates;
 
@@ -136,7 +147,12 @@ public class CityConstructor {
                 printable.print("Enter an area: ");
                 areaString = scannable.scanString();
             }
-            int area = Integer.valueOf(areaString);
+            int area = -1;
+            try {
+                area = Integer.valueOf(areaString);
+            } catch (Exception exception) {
+                printable.println("int type was requested");
+            }
             return area;
         } catch (Exception e){
             printable.println(e.getMessage());
@@ -153,7 +169,12 @@ public class CityConstructor {
                 printable.print("Enter a population: ");
                 populationString = scannable.scanString();
             }
-            long population = Long.valueOf(populationString);
+            long population = -1;
+            try {
+                population = Long.valueOf(populationString);
+            } catch (Exception exception) {
+                printable.println("long type was requested");
+            }
             return population;
         } catch (Exception e){
             printable.println(e.getMessage());
@@ -169,7 +190,12 @@ public class CityConstructor {
                 printable.print("Enter meters above sea level: ");
                 metersAboveSeaLevelString = scannable.scanString();
             }
-            Integer metersAboveSeaLevel = Integer.valueOf(metersAboveSeaLevelString);
+            Integer metersAboveSeaLevel = null;
+            try {
+                metersAboveSeaLevel = Integer.valueOf(metersAboveSeaLevelString);
+            } catch (Exception exception) {
+                printable.println("Integer type was requested");
+            }
             return metersAboveSeaLevel;
         } catch (Exception e) {
             printable.println(e.getMessage());
@@ -186,7 +212,12 @@ public class CityConstructor {
                 printable.print("Enter a telephone code: ");
                 telephoneCodeString = scannable.scanString();
             }
-            long telephoneCode = Long.valueOf(telephoneCodeString);
+            long telephoneCode = -1;
+            try {
+                telephoneCode = Long.valueOf(telephoneCodeString);
+            } catch (Exception exception) {
+                printable.println("long type was requested");
+            }
             return telephoneCode;
         } catch (Exception e) {
             printable.println(e.getMessage());
@@ -203,7 +234,12 @@ public class CityConstructor {
                 printable.print("Enter an agglomeration: ");
                 agglomerationString = scannable.scanString();
             }
-            long agglomeration = Long.valueOf(agglomerationString);
+            long agglomeration = -1;
+            try {
+                agglomeration = Long.valueOf(agglomerationString);
+            } catch (Exception exception) {
+                printable.println("long type was requested");
+            }
             return agglomeration;
         } catch (Exception e){
             printable.println(e.getMessage());
@@ -233,7 +269,12 @@ public class CityConstructor {
                 printable.print("Enter a birth year of governor : ");
                 yearString = scannable.scanString();
             }
-            int year = Integer.valueOf(yearString);
+            int year = -1;
+            try {
+                year = Integer.valueOf(yearString);
+            } catch (Exception exception) {
+                printable.println("int type was requested");
+            }
 
             printable.print("Enter a birth month of governor : ");
             String monthString = scannable.scanString();
@@ -241,7 +282,12 @@ public class CityConstructor {
                 printable.print("Enter a birth month of governor : ");
                 monthString = scannable.scanString();
             }
-            int month = Integer.valueOf(monthString);
+            int month = -1;
+            try {
+                month = Integer.valueOf(monthString);
+            } catch (Exception exception) {
+                printable.println("int type was requested");
+            }
 
             printable.print("Enter a birth day of governor : ");
             String dayString = scannable.scanString();
@@ -249,7 +295,12 @@ public class CityConstructor {
                 printable.print("Enter a birth day of governor : ");
                 dayString = scannable.scanString();
             }
-            int day = Integer.valueOf(dayString);
+            int day = -1;
+            try {
+                day = Integer.valueOf(dayString);
+            } catch (Exception exception) {
+                printable.println("int type was requested");
+            }
 
             Human governor = new Human(LocalDate.of(year, month, day));
             return governor;
